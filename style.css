@@ -1,0 +1,161 @@
+:root {
+  --bg1: #ffe3f1;
+  --bg2: #fff3c4;
+  --pink: #ff5fa2;
+  --purple: #7c4dff;
+  --blue: #29b6f6;
+  --yellow: #ffca28;
+  --green: #3ddc97;
+  --ink: #3b2a5a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 95, 162, .25), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(41, 182, 246, .25), transparent 40%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
+}
+
+/* Konfetti */
+.confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.confetti i {
+  position: absolute; top: -5vh; width: 1.2vh; height: 2.2vh; opacity: .85;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); }
+}
+
+/* Layout */
+.stage {
+  position: relative; z-index: 1;
+  height: 100dvh; width: 100vw;
+  padding: 1.5vh 3vw;
+  display: grid;
+  grid-template-columns: 11vw 1fr 11vw;
+  grid-template-rows: auto 1fr 11vh auto;
+  column-gap: 2vw;
+}
+
+.title {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-size: clamp(18px, 7vh, 52px);
+  line-height: 1.6;
+  padding-bottom: .1em;
+  background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(255,255,255,.8));
+}
+
+/* Wimpel */
+.banner {
+  grid-row: 2 / 4; position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 0; margin-top: -1vh;
+  transform-origin: top center;
+  animation: sway 4s ease-in-out infinite;
+}
+.banner-left { grid-column: 1; }
+.banner-right { grid-column: 3; animation-delay: -2s; }
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+.banner .string { width: 3px; height: 4vh; background: var(--ink); opacity: .5; flex: none; }
+.flag {
+  flex: 1; min-height: 0; width: 70%; max-width: 90px;
+  display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;
+  padding: 1.5vh 0 4vh;
+  background: linear-gradient(180deg, var(--pink), var(--purple));
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
+  box-shadow: 0 6px 12px rgba(0,0,0,.2);
+  color: #fff; font-weight: 800;
+  font-size: clamp(14px, 6.5vh, 40px); line-height: 1;
+  text-shadow: 0 2px 0 rgba(0,0,0,.2);
+}
+.banner-right .flag { background: linear-gradient(180deg, var(--blue), var(--green)); }
+
+/* Medienrahmen */
+.frame {
+  grid-column: 2; grid-row: 2;
+  position: relative; min-height: 0; margin: 1vh 0;
+  border-radius: 18px;
+  background: #fff;
+  border: 5px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, var(--pink), var(--yellow), var(--blue), var(--purple)) border-box;
+  box-shadow: 0 10px 30px rgba(124, 77, 255, .3);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.media { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #fdf7ff; }
+.media { position: relative; overflow: hidden; }
+/* Bild: nicht hochskalieren, unscharfer Hintergrund füllt den Rahmen */
+.media .bg { position: absolute; inset: -20px; background-size: cover; background-position: center; filter: blur(18px) saturate(1.2); opacity: .9; }
+.media img { position: relative; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; display: block; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.25); }
+/* Video: komplett sichtbar, nie beschnitten */
+.media video { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
+.placeholder { text-align: center; padding: 2vh; font-size: clamp(14px, 4.5vh, 28px); line-height: 1.3; }
+.placeholder .big { display: block; font-family: "Pacifico", cursive; font-size: clamp(20px, 8vh, 56px); color: var(--pink); }
+
+.textbox {
+  grid-column: 2; grid-row: 3; min-height: 0;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: .5vh 2vw; margin-bottom: 1vh;
+  background: #fff; border-radius: 16px;
+  border: 3px dashed var(--pink);
+  box-shadow: 0 4px 12px rgba(255, 95, 162, .25);
+  font-size: clamp(12px, 4vh, 22px); line-height: 1.2; font-weight: 600;
+  overflow-y: auto;
+}
+.textbox:empty { visibility: hidden; }
+.dots { position: absolute; bottom: 1vh; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
+.dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(124,77,255,.3); }
+.dots span.on { background: var(--pink); }
+
+.nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 5vh; height: 5vh; min-width: 32px; min-height: 32px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.85); color: var(--purple);
+  font-size: 4vh; line-height: 1; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.prev { left: 8px; } .next { right: 8px; }
+.nav[hidden] { display: none; }
+
+/* Tabs */
+.tabs {
+  grid-column: 1 / -1; grid-row: 4;
+  display: flex; justify-content: space-evenly; align-items: flex-end;
+  padding-top: 1vh;
+}
+.tab {
+  background: rgba(255,255,255,.7); border: 3px solid transparent; border-radius: 16px;
+  padding: .8vh 1.5vw; cursor: pointer;
+  height: 14vh; display: flex; align-items: center; gap: 0; justify-content: center;
+  transition: transform .2s, border-color .2s, background .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab svg { height: 100%; width: auto; }
+.tab:hover { transform: translateY(-4px) scale(1.05); }
+.tab.active { background: #fff; border-color: var(--pink); transform: translateY(-6px) scale(1.08); box-shadow: 0 6px 14px rgba(255,95,162,.4); }
+
+/* Hochformat-Hinweis */
+.rotate-hint {
+  display: none; position: fixed; inset: 0; z-index: 10;
+  flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2)); padding: 24px; font-size: 22px;
+}
+.rotate-hint .phone { font-size: 64px; animation: rot 2s ease-in-out infinite; }
+@keyframes rot { 0%, 30% { transform: rotate(0); } 70%, 100% { transform: rotate(-90deg); } }
+@media (orientation: portrait) and (max-width: 700px) { .rotate-hint { display: flex; } }
