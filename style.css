@@ -39,7 +39,7 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
   font-size: clamp(26px, 5.2vw, 52px); line-height: 1.05; font-weight: 800; letter-spacing: -.02em;
 }
 .hero h1 span {
-  display: inline-block; padding: .05em .12em .18em 0;
+  display: inline-block; line-height: 1.5; padding: .05em .15em .32em 0; margin-bottom: -.25em;
   font-family: "Pacifico", cursive; font-weight: 400; letter-spacing: 0;
   background: linear-gradient(90deg, #ff5fa2, #8a4dff 55%, #3b6cf6);
   -webkit-background-clip: text; background-clip: text; color: transparent;
