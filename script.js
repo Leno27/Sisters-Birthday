@@ -54,5 +54,5 @@ const CONTENT = {
  */
 const FINALE = {
   title: "Alles Gute zum Geburtstag!",
-  text: "Du hast alle Erinnerungen entdeckt. Danke für so viele schöne gemeinsame Momente – und auf noch viele mehr!\n\nHab einen wundervollen Tag, große Schwester. 🎂",
+  text: "Ich hoffe dir haben die Erinnerungen gefallen. Danke für so viele schöne gemeinsame Momente – Lass uns noch ein paar mehr sammeln!\n\nHab einen wundervollen Tag. 🎂",
 };
