@@ -82,12 +82,52 @@ function updateProgress() {
   CATEGORIES.forEach(c => (CONTENT[c.key]?.items || []).forEach(it => ids.add(it._id)));
   const n = [...opened].filter(id => ids.has(id)).length;
   progressBar.style.width = (total ? (n / total) * 100 : 0) + "%";
+  progressText.classList.toggle("link", n === total && total > 0);
   progressText.textContent = n === 0
     ? `${total} Überraschungen warten – tippe ein Feld an`
-    : n === total ? "Alles entdeckt – hoffentlich hat's dir gefallen 🎉"
+    : n === total ? "Alles entdeckt 🎉 – tippe hier für eine Nachricht"
     : `${n} von ${total} entdeckt`;
 }
 updateProgress();
+
+/* ---------- Abschluss-Fenster ---------- */
+const finale = document.getElementById("finale");
+const FINALE_KEY = "sister-birthday-finale-v1";
+let finalePending = false;
+const finaleSeen = () => { try { return localStorage.getItem(FINALE_KEY) === "1"; } catch (e) { return false; } };
+
+function allOpened() {
+  const ids = [];
+  CATEGORIES.forEach(c => (CONTENT[c.key]?.items || []).forEach(it => ids.push(it._id)));
+  return ids.length > 0 && ids.every(id => opened.has(id));
+}
+
+function openFinale() {
+  document.getElementById("finaleTitle").textContent = FINALE.title;
+  const box = document.getElementById("finaleText");
+  box.innerHTML = "";
+  FINALE.text.split(/\n\n+/).forEach(par => {
+    const p = document.createElement("p");
+    p.textContent = par;
+    box.appendChild(p);
+  });
+  finale.hidden = false;
+  requestAnimationFrame(() => finale.classList.add("on"));
+  document.body.classList.add("lock");
+  try { localStorage.setItem(FINALE_KEY, "1"); } catch (e) {}
+  celebrate();
+  document.getElementById("finaleClose").focus({ preventScroll: true });
+}
+
+function closeFinale() {
+  finale.classList.remove("on");
+  document.body.classList.remove("lock");
+  setTimeout(() => { finale.hidden = true; }, 250);
+}
+
+document.getElementById("finaleClose").addEventListener("click", closeFinale);
+document.getElementById("finaleVeil").addEventListener("click", closeFinale);
+progressText.addEventListener("click", () => { if (allOpened()) openFinale(); });
 
 /* ---------- Betrachter ---------- */
 let cur = { cat: null, i: 0, tile: null };
@@ -126,6 +166,7 @@ function show() {
   const tile = board.querySelector(`.tile[data-cat="${cur.cat}"][data-i="${cur.i}"]`);
   if (tile) paintTile(tile, item);
   updateProgress();
+  if (!finaleSeen() && allOpened()) finalePending = true;
 }
 
 function openViewer(cat, i, tile) {
@@ -144,7 +185,10 @@ function closeViewer() {
   mediaEl.querySelectorAll("video").forEach(v => v.pause());
   viewer.classList.remove("on");
   document.body.classList.remove("lock");
-  setTimeout(() => { viewer.hidden = true; mediaEl.innerHTML = ""; }, 250);
+  setTimeout(() => {
+    viewer.hidden = true; mediaEl.innerHTML = "";
+    if (finalePending) { finalePending = false; openFinale(); }
+  }, 250);
   const t = board.querySelector(`.tile[data-cat="${cur.cat}"][data-i="${cur.i}"]`);
   if (t) t.focus({ preventScroll: true });
 }
@@ -161,6 +205,7 @@ document.getElementById("veil").addEventListener("click", closeViewer);
 prevBtn.addEventListener("click", () => step(-1));
 nextBtn.addEventListener("click", () => step(1));
 document.addEventListener("keydown", e => {
+  if (!finale.hidden && e.key === "Escape") return closeFinale();
   if (viewer.hidden) return;
   if (e.key === "Escape") closeViewer();
   if (e.key === "ArrowLeft") step(-1);
@@ -196,6 +241,19 @@ function burst() {
     const a = Math.random() * Math.PI * 2, s = 3 + Math.random() * 6;
     parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 3, w: 5 + Math.random() * 5, h: 3 + Math.random() * 4,
       rot: Math.random() * 6, vr: (Math.random() - .5) * .4, life: 1, c: colors[k % colors.length] });
+  }
+  if (!raf) raf = requestAnimationFrame(tick);
+}
+
+function celebrate() {
+  if (reduce) return;
+  const colors = ["#ff5fa2", "#ffcc33", "#3b6cf6", "#8a4dff", "#0fb59a", "#ff7a45"];
+  for (let k = 0; k < 140; k++) {
+    const left = k % 2 === 0;
+    const a = (left ? -1 : 1) * (0.5 + Math.random() * 0.9) - Math.PI / 2 + (left ? 0.2 : -0.2);
+    const s = 8 + Math.random() * 10;
+    parts.push({ x: left ? 0 : canvas.width, y: canvas.height, vx: Math.cos(a) * s, vy: Math.sin(a) * s, w: 6 + Math.random() * 6, h: 4 + Math.random() * 5,
+      rot: Math.random() * 6, vr: (Math.random() - .5) * .4, life: 1.6, c: colors[k % colors.length] });
   }
   if (!raf) raf = requestAnimationFrame(tick);
 }

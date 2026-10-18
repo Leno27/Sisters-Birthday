@@ -48,3 +48,11 @@ const CONTENT = {
   },
 };
 
+/*
+ * Abschluss-Text: erscheint als Pop-up, sobald alle Felder angesehen wurden.
+ * Einen neuen Absatz beginnst du mit zwei Zeichenfolgen \n hintereinander. Gerne durch deinen eigenen Text ersetzen.
+ */
+const FINALE = {
+  title: "Alles Gute zum Geburtstag!",
+  text: "Du hast alle Erinnerungen entdeckt. Danke für so viele schöne gemeinsame Momente – und auf noch viele mehr!\n\nHab einen wundervollen Tag, große Schwester. 🎂",
+};

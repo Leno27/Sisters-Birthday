@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
   <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -39,6 +39,17 @@
         <p class="cap" id="caption"></p>
         <div class="count" id="count"></div>
       </aside>
+    </section>
+  </div>
+
+  <!-- Abschluss-Fenster: erscheint, wenn alle Felder geöffnet wurden -->
+  <div class="finale" id="finale" hidden role="dialog" aria-modal="true" aria-labelledby="finaleTitle">
+    <div class="veil" id="finaleVeil"></div>
+    <section class="card">
+      <div class="emoji" aria-hidden="true">🎉</div>
+      <h2 id="finaleTitle"></h2>
+      <p id="finaleText"></p>
+      <button class="btn" id="finaleClose">Danke, das war schön</button>
     </section>
   </div>
 
@@ -97,7 +108,7 @@
         </svg></div>
   </div>
 
-  <script src="script.js?v=7"></script>
-  <script src="app.js?v=7"></script>
+  <script src="script.js?v=8"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>

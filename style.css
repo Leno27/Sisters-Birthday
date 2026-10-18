@@ -176,6 +176,40 @@ button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 }
 .close:hover { transform: rotate(90deg); transition: transform .25s; }
 
+/* ---------- Abschluss-Fenster ---------- */
+.finale { position: fixed; inset: 0; z-index: 25; display: grid; place-items: center; padding: 14px; opacity: 0; transition: opacity .25s; }
+.finale[hidden] { display: none; }
+.finale.on { opacity: 1; }
+.finale .card {
+  position: relative; width: min(100%, 520px); max-height: 100%; overflow-y: auto; text-align: center;
+  padding: 26px 24px 22px; border-radius: 30px;
+  background: linear-gradient(160deg, #fff, #fff4f9 60%, #f1ebff);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .5);
+  transform: translateY(24px) scale(.88) rotate(-2deg); transition: transform .5s cubic-bezier(.2, 1.4, .4, 1);
+}
+.finale.on .card { transform: none; }
+.finale .emoji { font-size: 46px; line-height: 1; animation: bob 1.6s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-6px) rotate(8deg); } }
+.finale h2 {
+  margin: 6px 0 10px; font-family: "Pacifico", cursive; font-weight: 400; font-size: clamp(24px, 5vw, 34px); line-height: 1.5; padding-bottom: .1em;
+  background: linear-gradient(90deg, #ff5fa2, #8a4dff 55%, #3b6cf6); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.finale p { font-size: clamp(16px, 2.2vw, 19px); line-height: 1.45; font-weight: 500; }
+.finale p + p { margin-top: 10px; }
+.finale .btn {
+  margin-top: 18px; padding: 10px 24px; border-radius: 99px; font-weight: 800; font-size: 17px; color: #fff;
+  background: linear-gradient(135deg, #ff5fa2, #8a4dff); box-shadow: 0 8px 20px -8px #8a4dff;
+}
+.finale .btn:hover { transform: translateY(-2px); }
+.progress p.link { cursor: pointer; color: #8a4dff; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-height: 480px) and (orientation: landscape) {
+  .finale .card { padding: 14px 20px 14px; }
+  .finale .emoji { font-size: 30px; }
+  .finale h2 { font-size: 24px; margin: 2px 0 6px; }
+  .finale p { font-size: 15px; }
+  .finale .btn { margin-top: 10px; padding: 7px 20px; }
+}
+
 /* Hochformat: kompaktes Bento, alles auf einen Blick */
 @media (orientation: portrait) {
   .hero { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
