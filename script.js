@@ -19,7 +19,7 @@ const CONTENT = {
   gamecube: {
     title: "GameCube",
     items: [
-      { type: "image", src: "media/gamecube/mario.jpg", caption: "Ich erinnere mich immer gerne an unsere gemeinsamen Runden in Mario Kart. Egal ob auf dem alten Game Cube oder der Wii. So gut konnte ich selten mit jemandem zusammen spielen :)" },
+      { type: "image", src: "media/gamecube/mario.jpg", caption: "Ich erinnere mich immer gerne an unsere gemeinsamen Runden in Mario Kart. Egal ob auf dem alten Game Cube oder der Wii. So gut konnte ich selten mit jemandem zusammen zocken :)" },
       { type: "image", src: "media/gamecube/party.jfif", caption: "Apropo Wii... Unsere unzählbar vielen Runden Wii Party kann ich bestimmt auch nie vergessen" }
     ],
   },
@@ -38,12 +38,12 @@ const CONTENT = {
     items: [
       { type: "image", src: "media/familie/weihe.jfif", caption: "Schon lange bist du bei meinen wichtigen Momenten mit dabei..." },
       { type: "image", src: "media/familie/pavarotti.jfif", caption: "Und ich hab gesehen wie du langsam erwachsen geworden bist. 7 Jahre ist das Bild schon her. Langsam werden wir echt alt..." },
-      { type: "image", src: "media/familie/schwan.jfif", caption: "Trotzdem sind wir immer alle für einander da, egal wie sehr das Leben sich bei jedem von uns verändert hat." },
-      { type: "image", src: "media/familie/geschenk.jfif", caption: "Manchmal wäre ich dennoch gerne wieder so klein und könnte unbekümmert Geschenke in der Stube aufreißen. Ich hoffe du hast heute genauso viel Freude beim Auspacken :)" },
+      { type: "image", src: "media/familie/schwan.jfif", caption: "Trotzdem sind wir immer alle füreinander da, egal wie sehr das Leben sich bei jedem von uns verändert hat." },
+      { type: "image", src: "media/familie/geschenk.jfif", caption: "Manchmal wäre ich dennoch gerne wieder so klein und könnte unbekümmert Geschenke in der Stube aufreißen. Ich hoffe, du hast heute genauso viel Freude beim Auspacken :)" },
       
-      { type: "image", src: "media/familie/bounty.jfif", caption: "So ein tolles Geschenk wie einen eueren kleinen Bounty wird es aber bestimmt nicht geben. Er sollte dich übrigens in Katzenjahren schon eine Weile im Alter überholt haben." },
-      { type: "image", src: "media/familie/grieche.jfif", caption: "In ein paar Tagen ist die dann endlich Familie wieder zusammen..." },
-      { type: "image", src: "media/familie/kloster.jfif", caption: "Dann können dieses Bild nochmal mit allen gemeinsam erneuern :)" }
+      { type: "image", src: "media/familie/bounty.jfif", caption: "So ein tolles Geschenk wie euren kleinen Bounty wird es aber bestimmt nicht geben. Er sollte dich übrigens in Katzenjahren schon eine Weile im Alter überholt haben." },
+      { type: "image", src: "media/familie/grieche.jfif", caption: "In ein paar Tagen ist dann endlich die Familie wieder zusammen..." },
+      { type: "image", src: "media/familie/kloster.jfif", caption: "Dann können wir dieses Bild nochmal mit allen gemeinsam erneuern :)" }
     ],
   },
 };
@@ -54,5 +54,5 @@ const CONTENT = {
  */
 const FINALE = {
   title: "Alles Gute zum Geburtstag!",
-  text: "Ich hoffe dir haben die Erinnerungen gefallen. Danke für so viele schöne gemeinsame Momente – Lass uns noch ein paar mehr sammeln!\n\nHab einen wundervollen Tag. 🎂",
+  text: "Ich hoffe, dir haben die Erinnerungen gefallen. Danke für so viele schöne gemeinsame Momente!\n\nHab einen wundervollen Tag. 🎂",
 };
